@@ -1,0 +1,15 @@
+# idea directory
+.idea
+
+# hidden gradle directory
+.gradle
+
+# iml files
+*.iml
+
+# db files
+*.db
+
+# log files
+*.log
+
