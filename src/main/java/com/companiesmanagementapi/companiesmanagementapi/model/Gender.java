@@ -18,11 +18,6 @@ public enum Gender {
         return gender;
     }
 
-    @Override
-    public String toString() {
-        return this.gender;
-    }
-
     @JsonCreator
     public static Gender fromText(String gender) {
         for (Gender g: Gender.values()) {
@@ -31,5 +26,10 @@ public enum Gender {
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    @Override
+    public String toString() {
+        return this.gender;
     }
 }

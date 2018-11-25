@@ -31,11 +31,11 @@ public class EmployeeResource {
 
     @GetMapping("/{id}")
     public Employee findById(@PathVariable Long id) {
-        throw new UnsupportedOperationException();
+        return employeeRepository.findOne(id);
     }
 
     @GetMapping(params = Url.Param.JOB_TITLE)
-    public List<Employee> findByJobTitle(@RequestParam(Url.Param.JOB_TITLE) String jobTitle) {
-        throw new UnsupportedOperationException();
+    public List<Employee> findByJobTitle(@RequestParam(Url.Param.JOB_TITLE) String word) {
+        return employeeRepository.findByJobTitleContainingIgnoreCase(word);
     }
 }
