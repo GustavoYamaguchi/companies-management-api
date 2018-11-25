@@ -13,6 +13,9 @@ public class Url {
 
     public static class Path {
 
+        public static final String COMPANIES_ENDPOINT = "companies";
+
         public static final String EMPLOYEES = "employees";
+        public static final String EMPLOYEES_ENPOINT = "employees";
     }
 }

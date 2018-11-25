@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/companies")
+@RequestMapping("/" + Url.Path.COMPANIES_ENDPOINT)
 public class CompanyResource {
 
     @Autowired
@@ -33,12 +33,12 @@ public class CompanyResource {
         throw new UnsupportedOperationException();
     }
 
-    @GetMapping
-    public List<Company> findByName(@RequestParam(Url.Param.COMPANY_NAME) String companyName){
+    @GetMapping(params = Url.Param.COMPANY_NAME)
+    public List<Company> findByCompanyName(@RequestParam(Url.Param.COMPANY_NAME) String companyName){
         throw new UnsupportedOperationException();
     }
 
-    @GetMapping
+    @GetMapping(params = Url.Param.INDUSTRY)
     public List<Company> findByIndustry(@RequestParam(Url.Param.INDUSTRY) String industry){
         throw new UnsupportedOperationException();
     }
