@@ -16,18 +16,17 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Size(min=2, max=30)
     private String name;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @NotNull
     @Email(message = Message.Error.INVALID_EMAIL)
     private String email;
 
     @NotNull
+    @Column(unique = true)
     @Size(min = 11, max = 11)
     private String cpf;
 
@@ -35,6 +34,9 @@ public class Employee {
 
     @Column(name = "job_title")
     private String jobTitle;
+
+    @NotNull
+    private String seed;
 
     public Long getId() {
         return id;
@@ -90,6 +92,14 @@ public class Employee {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    public String getSeed() {
+        return seed;
+    }
+
+    public void setSeed(String seed) {
+        this.seed = seed;
     }
 
     @Override

@@ -11,22 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseSeeder {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
-
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        seedEmployeeTable();
+        populateIndustryTable();
     }
 
-    private void seedEmployeeTable() {
-        Employee employee = new Employee();
-        employee.setId(new Long(1));
-        employee.setName("Gustavo");
-        employee.setGender(Gender.MALE);
-        employee.setEmail("gustavo@email.com");
-        employee.setCpf("11111111111");
-        employee.setJobTitle("Software Developer");
-        employeeRepository.save(employee);
+    private void populateIndustryTable() {
+
     }
 }
