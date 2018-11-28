@@ -46,7 +46,7 @@ public class CompanyResource {
 
     @GetMapping(params = Url.Param.INDUSTRY)
     public List<Company> findByIndustry(@RequestParam(Url.Param.INDUSTRY) String industry){
-        return companyRepository.findByIndustryIgnoreCase(industry);
+        throw new UnsupportedOperationException();
     }
 
     @GetMapping("/{id}/" + Url.Path.EMPLOYEES)

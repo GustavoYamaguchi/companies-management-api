@@ -17,5 +17,7 @@ public class Url {
 
         public static final String EMPLOYEES = "employees";
         public static final String EMPLOYEES_ENPOINT = "employees";
+
+        public static final String INDUSTRIES_ENDPOINT = "industries";
     }
 }
