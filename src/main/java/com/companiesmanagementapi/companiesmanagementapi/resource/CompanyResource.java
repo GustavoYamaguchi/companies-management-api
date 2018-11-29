@@ -1,10 +1,14 @@
 package com.companiesmanagementapi.companiesmanagementapi.resource;
 
 import com.companiesmanagementapi.companiesmanagementapi.constants.Url;
+import com.companiesmanagementapi.companiesmanagementapi.exception.ResourceNotFoundException;
 import com.companiesmanagementapi.companiesmanagementapi.model.Company;
 import com.companiesmanagementapi.companiesmanagementapi.model.Employee;
+import com.companiesmanagementapi.companiesmanagementapi.model.Industry;
 import com.companiesmanagementapi.companiesmanagementapi.repository.CompanyRepository;
 import com.companiesmanagementapi.companiesmanagementapi.repository.EmployeeRepository;
+import com.companiesmanagementapi.companiesmanagementapi.repository.IndustryRepository;
+import com.companiesmanagementapi.companiesmanagementapi.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +25,17 @@ public class CompanyResource {
     private CompanyRepository companyRepository;
 
     @Autowired
+    private CompanyService companyService;
+
+    @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private IndustryRepository industryRepository;
+
     @PostMapping
-    public ResponseEntity<Company> createCompany(@Valid @RequestBody Company company) {
-        Company newCompany = companyRepository.save(company);
+    public ResponseEntity<Company> createCompany(@Valid @RequestBody Company company) throws ResourceNotFoundException {
+        Company newCompany = companyService.save(company);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCompany);
     }
 
@@ -45,12 +55,14 @@ public class CompanyResource {
     }
 
     @GetMapping(params = Url.Param.INDUSTRY)
-    public List<Company> findByIndustry(@RequestParam(Url.Param.INDUSTRY) String industry){
-        throw new UnsupportedOperationException();
+    public List<Company> findByIndustry(@RequestParam(Url.Param.INDUSTRY) Long industryId){
+        Industry industry = industryRepository.findOne(industryId);
+        return companyRepository.findByIndustry(industry);
     }
 
     @GetMapping("/{id}/" + Url.Path.EMPLOYEES)
     public List<Employee> findAllEmployeesByCompanyId(@PathVariable Long id) {
-        return employeeRepository.findByEmployer(id);
+        Company company = companyRepository.findOne(id);
+        return employeeRepository.findByEmployer(company);
     }
 }

@@ -1,6 +1,7 @@
 package com.companiesmanagementapi.companiesmanagementapi.model;
 
 import com.companiesmanagementapi.companiesmanagementapi.constants.Message;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Employee {
 
     @Id
@@ -30,7 +32,9 @@ public class Employee {
     @Size(min = 11, max = 11)
     private String cpf;
 
-    private long employer;
+    @JoinColumn
+    @ManyToOne(targetEntity = Company.class)
+    private Company employer;
 
     @Column(name = "job_title")
     private String jobTitle;
@@ -78,11 +82,11 @@ public class Employee {
         this.cpf = cpf;
     }
 
-    public long getEmployer() {
+    public Company getEmployer() {
         return employer;
     }
 
-    public void setEmployer(long employer) {
+    public void setEmployer(Company employer) {
         this.employer = employer;
     }
 

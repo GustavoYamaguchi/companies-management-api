@@ -3,6 +3,7 @@ package com.companiesmanagementapi.companiesmanagementapi.resource;
 import com.companiesmanagementapi.companiesmanagementapi.constants.Url;
 import com.companiesmanagementapi.companiesmanagementapi.exception.CouldNotRetrieveSeedInformationException;
 import com.companiesmanagementapi.companiesmanagementapi.exception.InvalidDataRequestException;
+import com.companiesmanagementapi.companiesmanagementapi.exception.ResourceNotFoundException;
 import com.companiesmanagementapi.companiesmanagementapi.model.Employee;
 import com.companiesmanagementapi.companiesmanagementapi.repository.EmployeeRepository;
 import com.companiesmanagementapi.companiesmanagementapi.service.EmployeeService;
@@ -26,7 +27,7 @@ public class EmployeeResource {
 
     @PostMapping
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee)
-            throws InvalidDataRequestException, CouldNotRetrieveSeedInformationException {
+            throws InvalidDataRequestException, CouldNotRetrieveSeedInformationException, ResourceNotFoundException {
         Employee newEmployee = employeeService.save(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee);
     }

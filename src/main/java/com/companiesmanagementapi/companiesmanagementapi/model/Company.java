@@ -1,12 +1,19 @@
 package com.companiesmanagementapi.companiesmanagementapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "company")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Company {
 
     @Id
@@ -25,7 +32,13 @@ public class Company {
 
     private String website;
 
-    private String industry;
+    @ManyToOne()
+    @JoinColumn(name = "id_industry")
+    private Industry industry;
+
+    @OneToMany(mappedBy = "employer")
+    @JsonIgnore
+    private Set<Employee> employees;
 
     public Long getId() {
         return id;
@@ -67,12 +80,20 @@ public class Company {
         this.website = website;
     }
 
-    public String getIndustry() {
+    public Industry getIndustry() {
         return industry;
     }
 
-    public void setIndustry(String industry) {
+    public void setIndustry(Industry industry) {
         this.industry = industry;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

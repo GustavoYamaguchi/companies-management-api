@@ -1,9 +1,13 @@
 package com.companiesmanagementapi.companiesmanagementapi.service;
 
+import com.companiesmanagementapi.companiesmanagementapi.constants.Message;
 import com.companiesmanagementapi.companiesmanagementapi.exception.CouldNotRetrieveSeedInformationException;
 import com.companiesmanagementapi.companiesmanagementapi.exception.InvalidDataRequestException;
+import com.companiesmanagementapi.companiesmanagementapi.exception.ResourceNotFoundException;
+import com.companiesmanagementapi.companiesmanagementapi.model.Company;
 import com.companiesmanagementapi.companiesmanagementapi.model.Employee;
 import com.companiesmanagementapi.companiesmanagementapi.model.Gender;
+import com.companiesmanagementapi.companiesmanagementapi.repository.CompanyRepository;
 import com.companiesmanagementapi.companiesmanagementapi.repository.EmployeeRepository;
 import com.companiesmanagementapi.companiesmanagementapi.util.HttpClientUtil;
 import com.companiesmanagementapi.companiesmanagementapi.util.template.response.RandomUserResponse;
@@ -14,14 +18,24 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
 
     public static final String DEFAULT_RANDOM_USER_URL = "https://randomuser.me/api/?seed={}&results={}";
 
-    public Employee save(Employee employee) throws InvalidDataRequestException, CouldNotRetrieveSeedInformationException {
+    public Employee save(Employee employee) throws InvalidDataRequestException, CouldNotRetrieveSeedInformationException,
+            ResourceNotFoundException {
         if (employee.getId() != null || employee.getName() != null ||
                 employee.getGender() != null || employee.getEmail() != null) {
             throw new InvalidDataRequestException();
+        }
+        Long companyId = employee.getEmployer().getId();
+        Company company = companyRepository.findOne(companyId);
+        if (company == null) {
+            throw new ResourceNotFoundException(String.format(Message.Exception.RESOURCE_NOT_FOUND,
+                    Message.ResourceName.COMPANY, companyId));
         }
         updateEmployeeDataBySeed(employee);
         return employeeRepository.save(employee);
