@@ -4,6 +4,7 @@
 # auto-gederated directories
 .gradle
 out
+build
 
 # iml files
 *.iml
