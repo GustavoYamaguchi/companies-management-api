@@ -1,9 +1,6 @@
 package com.companiesmanagementapi.companiesmanagementapi.event.listener;
 
-import com.companiesmanagementapi.companiesmanagementapi.model.Employee;
-import com.companiesmanagementapi.companiesmanagementapi.model.Gender;
 import com.companiesmanagementapi.companiesmanagementapi.model.Industry;
-import com.companiesmanagementapi.companiesmanagementapi.repository.EmployeeRepository;
 import com.companiesmanagementapi.companiesmanagementapi.repository.IndustryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
