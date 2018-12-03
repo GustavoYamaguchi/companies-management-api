@@ -3,6 +3,8 @@
 Companies Management is a REST API server that registers and lists Companies and Employees.
 
 ---
+Stack
+---
 This project was developed using:
  - Java8
  - Spring Framework
@@ -10,12 +12,16 @@ This project was developed using:
  - H2 Database
 
 ---
+Running
+---
 You can download this repository and run our server by typing `./gradlew bootRun` into its directory.
 
 ---
 Docker Image: gustavoyama/companies-management-api  
 You can run a container of companies-management-api by running: `docker run -idt --name companies-management -p 8080:8080 gustavoyama/companies-management`.
 
+---
+How to use
 ---
 After running you can start to use it, you will need the base url: http://localhost:8080.  
 
@@ -27,10 +33,10 @@ With this token, you can now access the whole project.
 
 You can see below a brief explanation of each resource and how to use them:
 
-Industry  
+### Industry  
 * GET method in `/industries` uri lists all industries available.
 
-Company
+### Company
 * POST method in `/companies` uri creates a new company.  
   - Body request example:  
   ```json
@@ -51,7 +57,7 @@ Company
 * GET method in `/companies?industry={id}` lists all companies whose industry has id: {id}.
 * GET method in `/companies/{id}/employees` lists all employees whose employer has id: {id}.
 
-Employee
+### Employee
 * POST method in `/employees` uri creates a new employee.  
   - Body request example:  
   ```json
