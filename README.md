@@ -17,13 +17,15 @@ Docker Image: gustavoyama/companies-management-api
 You can run a container of companies-management-api by running: `docker run -idt --name companies-management -p 8080:8080 gustavoyama/companies-management`.
 
 ---
-After running you can start to use it using http://localhost:8080 as the base url.  
+After running you can start to use it, you will need the base url: http://localhost:8080.  
 
 It will require a token to access any endpoint, you can create it in the following uri: `/oauth/token`  
 Use the credentials `admin` username and `s3cr3t` password. You will also need the grant_type `password`, client-id `gustavo`
 and client-secret `p4ss`.
 
 With this token, you can now access the whole project.
+
+You can see below a brief explanation of each resource and how to use them:
 
 Industry  
 * GET method in `/industries` uri lists all industries available.
