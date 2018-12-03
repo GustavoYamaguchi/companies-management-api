@@ -29,7 +29,20 @@ Industry
 * GET method in `/industries` uri lists all industries available.
 
 Company
-* POST method in `/companies` uri creates a new company.
+* POST method in `/companies` uri creates a new company.  
+  - Body request example:  
+  ```json
+  {
+  "name": "Company 1",
+  "cnpj": "22222222222222",
+  "telephone": "123456",
+  "website": "stubsite.com",
+  "industry": {
+    "id": 1
+    }
+  }
+  ```
+
 * GET method in `/companies` uri lists all companies registered.
 * GET method in `/companies/{id}` shows infos of company with id: {id}.
 * GET method in `/companies?companyName={word}` lists all companies whose names contains {word} in their name.
@@ -37,7 +50,19 @@ Company
 * GET method in `/companies/{id}/employees` lists all employees whose employer has id: {id}.
 
 Employee
-* POST method in `/employees` uri creates a new employee.
+* POST method in `/employees` uri creates a new employee.  
+  - Body request example:  
+  ```json
+  {
+  "cpf": "11111111111",
+  "employer": {
+    "id": 1
+    },
+  "jobTitle": "Software Developer",
+  "seed": "761a3b5df2147bca"
+  }
+  ```
+
 * GET method in `/employees` uri lists all employees registered.
 * GET method in `/employees/{id}` shows infos of employees with id: {id}.
 * GET method in `/employees?jobTitle={word}` lists all employees whose jobTitle contains {word}.
